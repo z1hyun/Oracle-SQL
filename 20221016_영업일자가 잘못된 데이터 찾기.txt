@@ -1,0 +1,6 @@
+
+/*이전영업일과 익일영업일이 평일이 아닌 데이터를 찾는다*/
+/* 하지만 이전일자는 기준영업일보다 이전 인 날짜들, 익일일자는 기준영업일보다 이후 인 날짜들*/
+SELECT * FROM YMD  A
+WHERE BFR_BIZN_YMD IN (SELECT B.SLRCAL_YMD FROM YMD B WHERE HLDY_SECD != '1' AND A.SLRCAL_YMD >= B.SLRCAL_YMD) 
+OR NEXT_BIZN_YMD IN (SELECT B.SLRCAL_YMD FROM YMD B WHERE HLDY_SECD != '1' AND A.SLRCAL_YMD <= B.SLRCAL_YMD);
